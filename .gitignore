@@ -1,0 +1,31 @@
+node_modules
+
+# Общие файлы
+.DS_Store
+Thumbs.db
+
+# Файлы IDE
+.idea/
+.vscode/
+
+# Файлы конфигурации среды
+.env
+.env.*
+
+# Скомпилированные файлы
+build/
+dist/
+
+# Кэш и временные файлы
+.cache/
+tmp/
+
+# Тестовые данные и отчеты
+coverage/
+
+# Файлы блокировки версий
+package-lock.json
+yarn.lock
+
+# Файлы журналов
+*.log
