@@ -52,7 +52,6 @@ export class Router {
 
 	render() {
 		const component = new this.#currentRoute.component()
-		console.log(component.render())
 
 		if (!this.#layout) {
 			this.#layout = new Layout({
