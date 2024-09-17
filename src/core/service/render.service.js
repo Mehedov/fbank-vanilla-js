@@ -6,36 +6,43 @@ class RenderService {
 	 * @param {Array} components
 	 * @param {Object} [styles]
 	 * @returns {HTMLElement}
-	 * */
+	 */
 	htmlToElement(html, components = [], styles) {
 		const template = document.createElement('template')
 		template.innerHTML = html.trim()
 
 		const element = template.content.firstChild
 
-		this.#replaceComponentsTags(element, components)
+		if (styles) {
+			this.#applyModuleStyles(styles, element)
+		}
+
+		this.#replaceComponentTags(element, components)
+
 		return element
 	}
 
 	/**
-	 * @param {HTMLElement} parentHtml
+	 * @param {HTMLElement} parentElement
 	 * @param {Array} components
 	 */
-	#replaceComponentsTags(parentElement, components) {
+	#replaceComponentTags(parentElement, components) {
 		const componentTagPattern = /^component-/
-		const allElement = parentElement.getElementsTagName('*')
+		const allElements = parentElement.getElementsByTagName('*')
 
-		for (const element of allElement) {
+		for (const element of allElements) {
 			const elementTagName = element.tagName.toLowerCase()
 			if (componentTagPattern.test(elementTagName)) {
 				const componentName = elementTagName
 					.replace(componentTagPattern, '')
 					.replace(/-/g, '')
+
 				const foundComponent = components.find(Component => {
 					const instance =
 						Component instanceof ChildComponent
 							? Component
 							: new Component()
+
 					return (
 						instance.constructor.name.toLowerCase() ===
 						componentName
@@ -50,10 +57,36 @@ class RenderService {
 					element.replaceWith(componentContent)
 				} else {
 					console.error(
-						`Component ${componentName} not found in the provided components array`
-					) }
+						`Component "${componentName}" not found in the provided components array.`
+					)
+				}
 			}
 		}
+	}
+
+	/**
+	 * @param {Object} moduleStyles
+	 * @param {string} element
+	 * @returns {void}
+	 */
+	#applyModuleStyles(moduleStyles, element) {
+		if (!element) return
+
+		const applyStyles = element => {
+			for (const [key, value] of Object.entries(moduleStyles)) {
+				if (element.classList.contains(key)) {
+					element.classList.remove(key)
+					element.classList.add(value)
+				}
+			}
+		}
+
+		if (element.getAttribute('class')) {
+			applyStyles(element)
+		}
+
+		const elements = element.querySelectorAll('*')
+		elements.forEach(applyStyles)
 	}
 }
 
