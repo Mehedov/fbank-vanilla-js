@@ -8,32 +8,16 @@ body {
 }
 
 body {
-	background-color: #191b20;
+	margin: 0 auto;
+	background-color: #141414;
 	color: $white;
 	font-size: 17px;
 	line-height: 1.6;
-}
-
-input {
-	font-size: 16px;
-	background-color: transparent;
-	color: $white;
-
-	&::placeholder {
-		color: $text-gray;
-	}
-}
-
-a {
-	color: $white;
-	text-decoration: none;
-	transition: border-color 0.3s ease-in-out;
-	border-bottom: 1px solid transparent;
-	animation: drawing 0.4s;
-
-	&:hover {
-		border-color: $primary;
-	}
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: 'Rubik', sans-serif;
 }
 
 input[type='number']::-webkit-outer-spin-button,
