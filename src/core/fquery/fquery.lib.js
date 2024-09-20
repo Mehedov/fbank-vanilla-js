@@ -44,6 +44,45 @@ class FQuery {
 		}
 		this.element.style[property] = value
 	}
+
+	/**
+	 * @param {HTMLElement} childElement
+	 * @returns {FQuery}
+	 */
+	append(childElement) {
+		this.element.appendChild(childElement)
+		return this
+	}
+
+	before(newElement) {
+		if (!(newElement instanceof HTMLElement)) {
+			throw new Error('Element must be an HTMLElement')
+		}
+
+		const parentElement = this.element.parentElement
+
+		if (parentElement) {
+			parentElement.insertBefore(newElement, this.element)
+			return this
+		} else {
+			throw new Error('Element does not have a parentElement')
+		}
+	}
+
+	/**
+	 * Get or set the inner HTML of the selected element.
+	 * @param {string} [htmlContent] - Optional HTML content to set.
+	 * If not provided, the current inner HTML will be returned.
+	 * @returns {FQuery|string} The current FQuery instance for chaining when setting when setting HTML content, or the current inner HTML when getting.
+	 */
+	html(htmlContent) {
+		if (typeof htmlContent === undefined) {
+			return this.element.innerHTML
+		} else {
+			this.element.innerHTML = htmlContent
+			return this
+		}
+	}
 }
 
 /**
