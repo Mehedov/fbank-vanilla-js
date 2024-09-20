@@ -1,0 +1,7 @@
+.layout {
+	display: grid;
+	grid-template-columns: 860px 460px;
+	grid-template-areas:
+		'header aside'
+		'main aside';
+}
