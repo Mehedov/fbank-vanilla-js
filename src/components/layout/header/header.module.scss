@@ -1,0 +1,38 @@
+@import '@/styles/mixins';
+@import '@/styles/variables';
+
+.header {
+	@include flex-horizontal-center;
+	justify-content: space-between;
+	background-color: $bg-block;
+	border-top-left-radius: 18px;
+	grid-area: header;
+	max-width: 860px;
+	padding: 30px;
+	.logo {
+		font-size: 30px;
+		color: $white;
+		font-weight: 700;
+	}
+	.navigation {
+		.nav {
+			@include flex-horizontal-center;
+			gap: 20px;
+			li > a {
+				font-size: 20px;
+				color: $text-gray;
+				@include transition(color);
+				&:hover {
+					color: $primary;
+				}
+			}
+			.search {
+				background-color: $bg-currentBlock;
+				font-size: 15px;
+				color: $white;
+				padding: 10px 20px;
+				border-radius: 30px;
+			}
+		}
+	}
+}
