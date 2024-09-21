@@ -1,0 +1,23 @@
+@import '@/styles/mixins';
+@import '@/styles/variables';
+
+.field {
+	@include transition(border-color);
+	background-color: $bg-currentBlock;
+	border-radius: $radius;
+	border: 1px solid transparent;
+	padding: 12px 20px;
+	margin-bottom: 1.3rem;
+	display: block;
+
+	input {
+		width: 100%;
+		background-color: inherit;
+		color: $white;
+		font-size: 16px;
+	}
+
+	&:focus-within {
+		border-color: rgba($primary, 0.5);
+	}
+}
